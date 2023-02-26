@@ -1,23 +1,21 @@
-# Licence Agreement
+MIT License
 
-This licence agreement ("Agreement") governs the use of the software referred to in this Agreement ("Software") and may only be used with the express consent of the owner of the Software.
+Copyright (c) 2023 Tom
 
-## 1. Grant of Licence
-The owner of the Software hereby grants you a personal, non-exclusive and non-transferable licence to use the Software and to view and modify the Software source code.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## 2. Restrictions
-You may not reproduce, distribute or publicly display the Software. You may not offer, sell or license the source code of the Software on the market. You may not create derivative works based on the Software without the express written permission of the owner of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## 3. Intellectual Property Rights
-You acknowledge that all rights in the Software and related intellectual property are reserved to the owner of the Software. This Agreement does not grant you any rights in the Software or related intellectual property other than those expressly set out in this Agreement.
-
-## 4. Disclaimer of Warranty
-The Software is provided "as is" without warranty of any kind, either express or implied, including, but not limited to, the implied warranties of merchantability, fitness for a particular purpose and non-infringement. In no event shall the owner of the Software be liable for any direct, indirect, incidental, special or consequential damages arising out of the use or inability to use the Software.
-
-## 5. Governing law
-This Agreement shall be governed by and construed in accordance with the laws of the jurisdiction in which the owner of the Software has its principal place of business, without regard to conflicts of law principles.
-
-## 6. Modifications
-The Software Owner reserves the right to modify this Agreement at any time without notice. Amendments will be effective when posted on the Software Owner's website.
-
-By using the Software you agree to be bound by the terms of this Agreement. If you do not agree to the terms, do not use the software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
