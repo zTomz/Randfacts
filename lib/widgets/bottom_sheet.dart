@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,13 +41,13 @@ class MyBottomSheet extends HookConsumerWidget {
           ),
           const SizedBox(height: 15),
           SizedBox(
-            height: 300,
+            height: 200,
             child: ListView.builder(
               itemCount: likedFacts.value.length,
               itemBuilder: (context, index) => ListTile(
                 onTap: () => Share.share(
-                  likedFacts.value[index].text,
                   subject: "Look at this cool fact from Randfacts!",
+                  likedFacts.value[index].text,
                 ),
                 title: Text(
                   likedFacts.value[index].text,
@@ -63,8 +66,8 @@ class MyBottomSheet extends HookConsumerWidget {
                       for (Fact myFact in likedFacts.value)
                         if (myFact.uuid == likedFacts.value[index].uuid)
                           Fact(
-                            text: likedFacts.value[index].text,
-                            isLiked: !likedFacts.value[index].isLiked,
+                            text: myFact.text,
+                            isLiked: !myFact.isLiked,
                             uuid: myFact.uuid,
                           )
                         else
@@ -98,6 +101,28 @@ class MyBottomSheet extends HookConsumerWidget {
                 ),
               ),
               const Spacer(),
+              IconButton(
+                onPressed: () async {
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles(
+                    dialogTitle: "Pick background image",
+                    type: FileType.image,
+                  );
+
+                  if (result != null) {
+                    ref
+                        .read(backgroundProvider.notifier)
+                        .changeBackgroundToLocalImage(
+                          result.files.single
+                        );
+                  } else {
+                    // User canceled the picker
+                  }
+                },
+                tooltip: "Image from gallary",
+                icon: const Icon(Icons.upload_file_rounded),
+                color: Colors.grey.shade800,
+              ),
               IconButton(
                 onPressed: () {
                   ref.read(foregroundProvider.notifier).changeAppBrightness();

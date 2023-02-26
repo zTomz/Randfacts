@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
@@ -43,14 +45,14 @@ class BackgroundNotifier extends StateNotifier<File?> {
     final imageName = newImage.split("/").last;
 
     if (!File("$appDocDirecPath/$imageName").existsSync()) {
-      await saveImageFromNetwork(newImage, imageName);
+      await _saveImageFromNetwork(newImage, imageName);
     }
 
     state = File("$appDocDirecPath/$imageName");
     prefInstance.setString("background", imageName);
   }
 
-  Future<void> saveImageFromNetwork(String url, String fileName) async {
+  Future<void> _saveImageFromNetwork(String url, String fileName) async {
     final uri = Uri.parse(url);
     final response = await get(uri);
 
@@ -74,7 +76,7 @@ class BackgroundNotifier extends StateNotifier<File?> {
 
   void loadImages() async {
     final uri = Uri.parse(
-      "https://pixabay.com/api?key=$apiKey&orientation=vertical&per_page=50&image_type=illustration",
+      "https://pixabay.com/api?key=$pixabayApiKey&orientation=vertical&per_page=50&image_type=illustration",
     );
 
     final response = await get(uri);
@@ -86,5 +88,15 @@ class BackgroundNotifier extends StateNotifier<File?> {
         images.add(element["largeImageURL"]);
       }
     }
+  }
+
+  void changeBackgroundToLocalImage(PlatformFile platformFile) {
+    File fileFromPicker = File(platformFile.path!);
+    File newBackgroundImageFile = File("$appDocDirecPath/${platformFile.name}");
+    newBackgroundImageFile.createSync();
+    newBackgroundImageFile.writeAsBytesSync(fileFromPicker.readAsBytesSync());
+
+    state = File("$appDocDirecPath/${platformFile.name}");
+    prefInstance.setString("background", platformFile.name);
   }
 }

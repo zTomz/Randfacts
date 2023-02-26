@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:randfacts/models/fact.dart';
-import 'package:randfacts/models/local_notifications.dart';
 import 'package:randfacts/provider.dart';
 import 'package:randfacts/widgets/bottom_sheet.dart';
 import 'package:share_plus/share_plus.dart';
