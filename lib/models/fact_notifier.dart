@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:randfacts/models/fact.dart';
+import 'package:randfacts/models/local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -28,6 +29,13 @@ class FactNotifier extends StateNotifier<List<Fact>> {
     box = await Hive.openBox<Fact>("factsBox");
     allFacts =
         (await rootBundle.loadString("assets/facts/all_facts.txt")).split("\n");
+
+    // set all notifications after getting all facts from file
+    LocalNotifications.instance.cancelAllAlarms();
+    LocalNotifications.instance.zonedScheduleNotificationForNext7Days(
+      allFacts,
+    );
+
     prefInstance = await SharedPreferences.getInstance();
 
     state = [];

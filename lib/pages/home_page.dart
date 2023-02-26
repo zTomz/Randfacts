@@ -22,11 +22,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   void initState() {
     super.initState();
 
-    LocalNotifications.instance.cancelAllAlarms();
-    LocalNotifications.instance.zonedScheduleNotificationForNext7Days(
-      ref.read(factsProvider.notifier).allFacts,
-    );
-
     ref.read(factsProvider.notifier).loadFirstFacts();
     ref.read(backgroundProvider.notifier).init();
     ref.read(foregroundProvider.notifier).init();
