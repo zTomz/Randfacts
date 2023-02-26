@@ -5,6 +5,8 @@ import 'package:randfacts/models/fact.dart';
 import 'package:randfacts/pages/home_page.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
   Hive.registerAdapter(FactAdapter());
 

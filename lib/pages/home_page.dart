@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:randfacts/models/fact.dart';
-import 'package:randfacts/models/foreground_notifier.dart';
+import 'package:randfacts/models/local_notifications.dart';
 import 'package:randfacts/provider.dart';
 import 'package:randfacts/widgets/bottom_sheet.dart';
 import 'package:share_plus/share_plus.dart';
@@ -21,6 +21,12 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    LocalNotifications.instance.cancelAllAlarms();
+    LocalNotifications.instance.zonedScheduleNotificationForNext7Days(
+      ref.read(factsProvider.notifier).allFacts,
+    );
+
     ref.read(factsProvider.notifier).loadFirstFacts();
     ref.read(backgroundProvider.notifier).init();
     ref.read(foregroundProvider.notifier).init();
@@ -38,11 +44,12 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     List<Fact> facts = ref.watch(factsProvider);
     File? background = ref.watch(backgroundProvider);
-    AppBrightness appBrightness = ref.watch(foregroundProvider);
+    // ignore: unused_local_variable
+    ref.watch(foregroundProvider);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           showModalBottomSheet<void>(
             context: context,
             builder: (BuildContext context) {
@@ -114,6 +121,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 data: facts[index].text,
                                 size: 250,
                                 roundEdges: true,
+                                elementColor: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .color!,
                               ),
                             ),
                           ),

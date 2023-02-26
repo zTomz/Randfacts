@@ -61,14 +61,16 @@ class ForegroundNotifier extends StateNotifier<AppBrightness> {
 
   Color getColorForBrightness(BuildContext context) {
     if (state == AppBrightness.light) {
-      return Colors.white;
-    }
-
-    if (state == AppBrightness.dark) {
       return Colors.grey.shade800;
     }
 
-    return Theme.of(context).textTheme.bodyMedium!.color!;
+    if (state == AppBrightness.dark) {
+      return Theme.of(context).textTheme.bodyLarge!.color!;
+    }
+
+    return Theme.of(context).brightness == Brightness.light
+        ? Colors.grey.shade800
+        : Theme.of(context).textTheme.bodyLarge!.color!;
   }
 }
 

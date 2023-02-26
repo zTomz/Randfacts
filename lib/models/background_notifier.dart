@@ -28,9 +28,10 @@ class BackgroundNotifier extends StateNotifier<File?> {
     final backgroundData = prefInstance.getString("background");
     if (backgroundData == null || backgroundData == "none") {
       state = null;
+      return;
     }
 
-    final imageFile = File("$appDocDirecPath/${backgroundData!}");
+    final imageFile = File("$appDocDirecPath/$backgroundData");
     if (imageFile.existsSync()) {
       state = imageFile;
     } else {
